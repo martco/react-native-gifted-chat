@@ -118,9 +118,11 @@ export default class MessageContainer extends React.Component {
       position: message.user._id === this.props.user._id ? 'right' : 'left',
     };
 
-    if (this.props.renderMessage) {
-      return this.props.renderMessage(messageProps);
+    const ownRender = message.render || this.props.renderMessage;
+    if (ownRender) {
+      return ownRender(messageProps);
     }
+
     return <Message {...messageProps}/>;
   }
 
